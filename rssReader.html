@@ -16,7 +16,7 @@ function initialize() {
       	if(result.feed.entries[i].title.match(/PR:/i)){
       		continue;
       	}
-        var entry = result.feed.entries[i];
+    var entry = result.feed.entries[i];
 		var title = '<li><h3><a href="' + entry.link + '">' + entry.title + '</a></h3></li>';
 		var conte = '<li>' + entry.contentSnippet + '</li>';
 		var dates = '<li>' + moment(entry.publishedDate).format('YYYY年MM月DD日 hh:mm:ss') + '</li>';
