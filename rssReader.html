@@ -1,0 +1,30 @@
+
+<!-- RSS表示スペース -->
+<div id="feed"></div>
+
+<!-- For RSS Reader Script start-->
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript" src="/js/moment.min.js"></script>
+<script>
+google.load("feeds", "1");
+
+function initialize() {
+  var feed = new google.feeds.Feed("http://feedblog.ameba.jp/rss/ameblo/foofighters/rss20.xml");
+  feed.load(function(result) {
+    if (!result.error) {
+      for (var i = 0; i < result.feed.entries.length; i++) {
+      	if(result.feed.entries[i].title.match(/PR:/i)){
+      		continue;
+      	}
+        var entry = result.feed.entries[i];
+		var title = '<li><h3><a href="' + entry.link + '">' + entry.title + '</a></h3></li>';
+		var conte = '<li>' + entry.contentSnippet + '</li>';
+		var dates = '<li>' + moment(entry.publishedDate).format('YYYY年MM月DD日 hh:mm:ss') + '</li>';
+		$('#feed').append('<li class="post"><ul>' + title + conte + dates + '</ul></li>');
+      }
+    }
+  });
+}
+google.setOnLoadCallback(initialize);
+</script>
+<!-- For RSS Reader Script end-->
